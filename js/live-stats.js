@@ -13,19 +13,16 @@ async function fetchLiveUsers() {
             const currentCount = parseInt(countSpan.innerText) || 0;
             const targetCount = data.activeUsers || 0;
             
-            if (targetCount > 0) {
-                badge.style.display = 'flex';
-                // Eger sayi degistiyse minik bir pop animasyonu verelim
-                if (currentCount !== targetCount) {
-                    countSpan.innerText = targetCount;
-                    countSpan.style.transition = 'transform 0.2s ease';
-                    countSpan.style.transform = 'scale(1.5)';
-                    setTimeout(() => {
-                        countSpan.style.transform = 'scale(1)';
-                    }, 200);
-                }
-            } else {
-                badge.style.display = 'none';
+            badge.style.display = 'flex';
+            
+            // Eger sayi degistiyse minik bir pop animasyonu verelim
+            if (currentCount !== targetCount) {
+                countSpan.innerText = targetCount;
+                countSpan.style.transition = 'transform 0.2s ease';
+                countSpan.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    countSpan.style.transform = 'scale(1)';
+                }, 200);
             }
         }
     } catch (err) {
