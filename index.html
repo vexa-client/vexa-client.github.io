@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -224,10 +224,12 @@
                 <h2>Kısa cevaplar.</h2>
             </div>
             <div class="faq-list">
-                <details open><summary>Vexa ücretsiz mi?</summary><p>Evet. Release dosyaları GitHub üzerinden ücretsiz yayınlanır.</p></details>
-                <details><summary>Discord RPC için token gerekir mi?</summary><p>Hayır. Sadece Discord application client ID kullanılır; bot token veya gizli şifre gerekmez.</p></details>
-                <details><summary>Windows bilinmeyen yayıncı uyarısı normal mi?</summary><p>Evet, imzalı sertifika kullanılmadığında Windows bu uyarıyı gösterebilir. Dosyayı resmi release sayfasından indirmen önerilir.</p></details>
-                <details><summary>Güncellemeler nasıl gelir?</summary><p>Launcher `versions.json` ve GitHub Releases üzerinden yeni launcher/client sürümlerini kontrol eder.</p></details>
+                <details open><summary>Launcher açılıyor ama Oyna butonu client'ı başlatmıyorsa ne kontrol edilmeli?</summary><p>Launcher'ın yanında kurulu `game/vexa-client.exe` dosyası olmalı. Dosya eksikse launcher yeniden `app.zip` indirip kurmalı; release içinde güncel `app.zip` bulunduğundan emin olun.</p></details>
+                <details><summary>Discord RPC neden görünmeyebilir?</summary><p>Discord masaüstü uygulaması açık olmalı, Vexa ayarlarında RPC kapalı olmamalı ve release build'i `DISCORD_CLIENT_ID` secret'ı ile alınmış olmalı. Secret eksikse client çalışır ama RPC aktifleşmez.</p></details>
+                <details><summary>Yeni sürüm yayınlandığında kullanıcılar ne indirir?</summary><p>Kullanıcı normalde sadece launcher installer'ı indirir. Launcher, yayınlanan `versions.json` ve GitHub Release asset'lerini kontrol ederek client paketini otomatik günceller.</p></details>
+                <details><summary>FPS unlocker her bilgisayarda aynı sonucu verir mi?</summary><p>Hayır. Sonuç monitör Hz değeri, ekran kartı, Chromium ayarları ve oyun içi yük durumuna göre değişir. Vexa hedef FPS'i yükseltir ama donanım sınırını aşamaz.</p></details>
+                <details><summary>Ayarlar ve profiller silinir mi?</summary><p>Normal güncellemede kullanıcı ayarları korunur. FPS, RPC, profil, avatar ve arka plan tercihleri Electron userData klasöründeki yerel config dosyasında tutulur.</p></details>
+                <details><summary>Windows bilinmeyen yayıncı uyarısı neden çıkar?</summary><p>Installer resmi kod imzalama sertifikasıyla imzalanmadığında Windows bu uyarıyı gösterebilir. Güvenli indirme için yalnızca bu siteyi veya GitHub Releases sayfasını kullanın.</p></details>
             </div>
         </section>
     </main>
