@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --bg: #07100f;
     --bg-2: #0c1715;
     --panel: rgba(16, 27, 25, 0.78);
@@ -701,16 +701,63 @@ h2 {
 }
 
 .faq details {
-    padding: 18px 20px;
+    overflow: hidden;
+    padding: 0;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.faq details.is-open {
+    border-color: rgba(53, 227, 157, 0.34);
+    background: rgba(16, 27, 25, 0.9);
 }
 
 .faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 64px;
+    padding: 18px 20px;
     cursor: pointer;
     font-weight: 900;
+    list-style: none;
 }
 
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+    content: "+";
+    display: grid;
+    place-items: center;
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--green);
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+}
+
+.faq details.is-open summary::after {
+    transform: rotate(45deg);
+    background: rgba(53, 227, 157, 0.14);
+    color: var(--text);
+}
+
+.faq-panel {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 260ms ease, opacity 220ms ease;
+}
+
+.faq details.is-open .faq-panel { opacity: 1; }
+
 .faq p {
-    margin: 12px 0 0;
+    margin: 0;
+    padding: 0 20px 20px;
 }
 
 .site-footer {

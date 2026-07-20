@@ -1,4 +1,4 @@
-﻿const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
+const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
 const LATEST_RELEASE_PAGE = "https://github.com/vexa-client/vexa/releases/latest";
 
 function formatDate(value) {
@@ -81,6 +81,65 @@ function setupRevealAnimations() {
     document.querySelectorAll("[data-anime]").forEach((element) => observer.observe(element));
 }
 
+
+function setupFaqAccordion() {
+    const items = Array.from(document.querySelectorAll(".faq-list details"));
+    if (!items.length) return;
+
+    const wrapContent = (details) => {
+        if (details.querySelector(":scope > .faq-panel")) return details.querySelector(":scope > .faq-panel");
+        const panel = document.createElement("div");
+        panel.className = "faq-panel";
+        Array.from(details.children).forEach((child) => {
+            if (child.tagName.toLowerCase() !== "summary") panel.appendChild(child);
+        });
+        details.appendChild(panel);
+        return panel;
+    };
+
+    const closeItem = (details) => {
+        const panel = wrapContent(details);
+        panel.style.height = `${panel.scrollHeight}px`;
+        details.classList.remove("is-open");
+        requestAnimationFrame(() => {
+            panel.style.height = "0px";
+        });
+        window.setTimeout(() => {
+            if (!details.classList.contains("is-open")) details.open = false;
+        }, 280);
+    };
+
+    const openItem = (details) => {
+        const panel = wrapContent(details);
+        items.forEach((item) => {
+            if (item !== details && item.open) closeItem(item);
+        });
+        details.open = true;
+        details.classList.add("is-open");
+        panel.style.height = "0px";
+        requestAnimationFrame(() => {
+            panel.style.height = `${panel.scrollHeight}px`;
+        });
+        window.setTimeout(() => {
+            if (details.classList.contains("is-open")) panel.style.height = "auto";
+        }, 280);
+    };
+
+    items.forEach((details, index) => {
+        const panel = wrapContent(details);
+        const summary = details.querySelector("summary");
+        const shouldOpen = details.open || index === 0;
+        details.open = shouldOpen;
+        details.classList.toggle("is-open", shouldOpen);
+        panel.style.height = shouldOpen ? "auto" : "0px";
+
+        summary?.addEventListener("click", (event) => {
+            event.preventDefault();
+            if (details.open && details.classList.contains("is-open")) closeItem(details);
+            else openItem(details);
+        });
+    });
+}
 function setupMobileNav() {
     const header = document.querySelector(".site-header");
     const toggle = document.querySelector(".nav-toggle");
