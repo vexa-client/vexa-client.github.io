@@ -20,6 +20,7 @@ async function hydrateLatestRelease() {
     const releaseDate = document.getElementById("releaseDate");
     const downloadButton = document.getElementById("downloadButton");
     const status = document.getElementById("downloadStatus");
+    const launcherReleaseStatus = document.getElementById("launcherReleaseStatus");
 
     if (!version || !releaseDate || !downloadButton || !status) return;
 
@@ -36,6 +37,7 @@ async function hydrateLatestRelease() {
         const installer = pickAsset(assets, /^vexa-launcher-setup-.*\.exe$/i);
 
         version.textContent = release.tag_name || "Son sürüm";
+        if (launcherReleaseStatus) launcherReleaseStatus.textContent = `${release.tag_name || "Son sürüm"} hazır`;
         releaseDate.textContent = `${formatDate(release.published_at)} tarihinde yayınlandı.`;
 
         if (installer?.browser_download_url) {
@@ -51,6 +53,7 @@ async function hydrateLatestRelease() {
         }
     } catch (error) {
         version.textContent = "Son release";
+        if (launcherReleaseStatus) launcherReleaseStatus.textContent = "Release bilgisi bekleniyor";
         releaseDate.textContent = "GitHub bilgisi şu an alınamadı.";
         downloadButton.href = LATEST_RELEASE_PAGE;
         downloadButton.textContent = "Release sayfasını aç";
@@ -163,5 +166,6 @@ function setupMobileNav() {
 document.addEventListener("DOMContentLoaded", () => {
     setupRevealAnimations();
     setupMobileNav();
+    setupFaqAccordion();
     hydrateLatestRelease();
 });
