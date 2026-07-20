@@ -1,36 +1,37 @@
-const VERCEL_API_URL = 'https://vexa-vercel-api.vercel.app';
+﻿const VERCEL_API_URL = "https://vexa-vercel-api.vercel.app";
 
 async function fetchLiveUsers() {
+    const badge = document.getElementById("liveUsersBadge");
+    const countSpan = document.getElementById("liveUsersCount");
+    if (!badge || !countSpan) return;
+
     try {
-        const response = await fetch(`${VERCEL_API_URL}/api/stats`);
+        const response = await fetch(`${VERCEL_API_URL}/api/stats`, { cache: "no-store" });
         const data = await response.json();
-        
-        if (data.success) {
-            const badge = document.getElementById('liveUsersBadge');
-            const countSpan = document.getElementById('liveUsersCount');
-            
-            // Animasyonlu sayac guncelleme
-            const currentCount = parseInt(countSpan.innerText) || 0;
-            const targetCount = data.activeUsers || 0;
-            
-            badge.style.display = 'flex';
-            
-            // Eger sayi degistiyse minik bir pop animasyonu verelim
-            if (currentCount !== targetCount) {
-                countSpan.innerText = targetCount;
-                countSpan.style.transition = 'transform 0.2s ease';
-                countSpan.style.transform = 'scale(1.5)';
-                setTimeout(() => {
-                    countSpan.style.transform = 'scale(1)';
-                }, 200);
-            }
+
+        if (!data.success) return;
+
+        const currentCount = parseInt(countSpan.textContent, 10) || 0;
+        const targetCount = data.activeUsers || 0;
+
+        badge.hidden = false;
+
+        if (currentCount !== targetCount) {
+            countSpan.textContent = targetCount;
+            countSpan.animate([
+                { transform: "scale(1)" },
+                { transform: "scale(1.28)" },
+                { transform: "scale(1)" }
+            ], {
+                duration: 260,
+                easing: "ease-out"
+            });
         }
     } catch (err) {
-        console.error('Failed to fetch live stats:', err);
+        console.warn("Live stats alınamadı:", err);
     }
 }
 
-// Fetch stats initially and then every 15 seconds
 document.addEventListener("DOMContentLoaded", () => {
     fetchLiveUsers();
     setInterval(fetchLiveUsers, 15000);

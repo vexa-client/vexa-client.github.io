@@ -1,28 +1,28 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HaxBall Client İndir | Vexa Client - FPS Unlocker ve Launcherr</title>
-    <meta name="description" content="HaxBall client arayanlar için Vexa Client: Windows launcher, FPS unlocker, Discord RPC, arka plan sistemi, kısayollar ve otomatik güncelleme desteği.">
-    <meta name="keywords" content="haxball client, haxball client indir, haxball fps unlocker, haxball launcher, vexa client, vexa haxball client">
+    <title>Vexa Client | HaxBall Client, Launcher ve FPS Unlocker</title>
+    <meta name="description" content="Vexa Client; HaxBall için modern Windows launcher, FPS unlocker, Discord RPC, özel arayüz, profil sistemi ve otomatik güncelleme sunar.">
+    <meta name="keywords" content="haxball client, haxball client indir, haxball fps unlocker, haxball launcher, vexa client, discord rpc haxball">
     <meta name="author" content="Vexa Client">
     <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#19d19a">
+    <meta name="theme-color" content="#0c1614">
     <meta property="og:title" content="Vexa Client - HaxBall Client İndir">
-    <meta property="og:description" content="HaxBall için Windows client, FPS unlocker, Discord RPC ve otomatik güncelleme destekli Vexa launcher.">
+    <meta property="og:description" content="HaxBall için profesyonel Windows launcher, FPS unlocker, Discord RPC ve otomatik güncelleme sistemi.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vexa-client.github.io/">
     <meta property="og:image" content="https://vexa-client.github.io/assets/logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vexa Client - HaxBall Client">
-    <meta name="twitter:description" content="HaxBall için hızlı Windows client ve launcher.">
+    <meta name="twitter:description" content="HaxBall için modern Windows client ve launcher.">
     <meta name="twitter:image" content="https://vexa-client.github.io/assets/logo.png">
     <link rel="canonical" href="https://vexa-client.github.io/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <script type="application/ld+json">
@@ -35,8 +35,8 @@
         "operatingSystem": "Windows",
         "url": "https://vexa-client.github.io/",
         "downloadUrl": "https://github.com/vexa-client/vexa/releases/latest",
-        "softwareVersion": "1.2.1",
-        "description": "HaxBall için Windows launcher, FPS unlocker, Discord RPC, arka plan sistemi ve otomatik güncelleme destekli masaüstü client.",
+        "softwareVersion": "1.2.2",
+        "description": "HaxBall için Windows launcher, FPS unlocker, Discord RPC, özel arayüz ve otomatik güncelleme destekli masaüstü client.",
         "publisher": {
             "@type": "Organization",
             "name": "Vexa Client",
@@ -51,135 +51,195 @@
     </script>
 </head>
 <body>
+    <div class="page-noise" aria-hidden="true"></div>
+
     <header class="site-header">
         <a class="brand" href="/" aria-label="Vexa Client ana sayfa">
             <img src="assets/logo.png" alt="Vexa Client logosu" class="brand-mark">
-            <span class="brand-text">Vexa <small>Client</small></span>
+            <span class="brand-copy"><strong>Vexa</strong><small>Client</small></span>
         </a>
+
+        <button class="nav-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false">
+            <span></span><span></span>
+        </button>
+
         <nav class="header-links" aria-label="Ana bağlantılar">
-            <div class="live-users-badge" id="liveUsersBadge" style="display: none; align-items: center; gap: 6px; background: rgba(25, 209, 154, 0.1); border: 1px solid rgba(25, 209, 154, 0.3); padding: 4px 12px; border-radius: 20px; font-weight: 600; color: #19d19a; margin-right: 12px;">
-                <span class="pulsing-dot" style="width: 8px; height: 8px; background: #19d19a; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #19d19a;"></span>
-                <span id="liveUsersCount">0</span> Oyuncu
+            <div class="live-users-badge" id="liveUsersBadge" hidden>
+                <span class="pulsing-dot"></span>
+                <strong id="liveUsersCount">0</strong>
+                <span>aktif</span>
             </div>
-            <a href="#ozellikler">Özellikler</a>
-            <a href="#kurulum">Kurulum</a>
+            <a href="#screenshots">Görüntüler</a>
+            <a href="#features">Özellikler</a>
+            <a href="#download">İndir</a>
+            <a href="#faq">SSS</a>
             <a href="/discord">Discord</a>
             <a href="https://github.com/vexa-client/vexa" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
+        <section class="hero" id="top">
             <div class="hero-copy">
-                <p class="eyebrow">HaxBall client ve Windows launcher</p>
-                <h1>HaxBall Client indir: Vexa ile oyuna daha hızlı gir.</h1>
+                <p class="eyebrow">HaxBall için modern Windows client</p>
+                <h1>Daha akıcı, daha düzenli, daha hızlı bir HaxBall deneyimi.</h1>
                 <p class="hero-text">
-                    Vexa Client; HaxBall için FPS unlocker, Discord RPC, arka plan sistemi, kısayollar ve otomatik güncelleme desteğini tek Windows launcher içinde toplar.
+                    Vexa Client; launcher, otomatik güncelleme, FPS araçları, Discord Rich Presence,
+                    profil sistemi, özel arka planlar ve geliştirilmiş oda tarayıcısını tek masaüstü uygulamasında toplar.
                 </p>
 
-                <div class="download-card" id="indir">
-                    <div>
-                        <span class="release-label">Son sürüm</span>
-                        <strong id="releaseVersion">v1.2.1</strong>
-                        <small id="releaseDate">Bugün yayınlandı.</small>
-                    </div>
+                <div class="hero-actions" id="download">
                     <a id="downloadButton" class="btn-primary is-loading" href="https://github.com/vexa-client/vexa/releases/latest" target="_blank" rel="noreferrer">
-                        HaxBall Client indir
+                        Son sürümü indir
                     </a>
-                    <p id="downloadStatus" class="download-status">vexa-launcher-setup-1.2.1.exe otomatik seçildi.</p>
+                    <a class="btn-secondary" href="https://github.com/vexa-client/vexa/releases/latest" target="_blank" rel="noreferrer">
+                        Release notları
+                    </a>
+                </div>
+
+                <div class="release-card">
+                    <span>Son release</span>
+                    <strong id="releaseVersion">v1.2.2</strong>
+                    <p id="releaseDate">GitHub release bilgisi yükleniyor.</p>
+                    <small id="downloadStatus">Setup dosyası otomatik seçilecek.</small>
                 </div>
             </div>
 
-            <div class="product-preview" aria-label="Vexa HaxBall Client arayüz önizlemesi">
-                <div class="window-bar">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="preview-header">
-                    <div class="mini-logo">V</div>
-                    <div>
-                        <strong>Vexa Client</strong>
-                        <small>LIVE</small>
+            <div class="hero-visual" aria-label="Vexa Client arayüz önizlemesi">
+                <div class="desktop-window launcher-window">
+                    <div class="window-top"><span></span><span></span><span></span></div>
+                    <div class="launcher-body">
+                        <div class="launcher-status">
+                            <img src="assets/logo.png" alt="" aria-hidden="true">
+                            <div><strong>Vexa Launcher</strong><small>1.2.2 hazır</small></div>
+                        </div>
+                        <div class="progress-shell"><span style="width: 86%"></span></div>
+                        <div class="launcher-grid">
+                            <span>FPS Unlocker</span><span>Discord RPC</span><span>Auto Update</span>
+                        </div>
                     </div>
-                    <button>GİRİŞ</button>
                 </div>
-                <div class="field">
-                    <div class="field-line"></div>
-                    <div class="field-circle"></div>
-                    <div class="player player-red">1</div>
-                    <div class="player player-blue"></div>
-                </div>
-                <div class="preview-panel">
-                    <span>FPS: <strong>240</strong></span>
-                    <span>GPU: düşük kullanım</span>
-                    <span>Auto update hazır</span>
+
+                <div class="desktop-window room-window">
+                    <div class="client-bar">
+                        <strong>Room Browser</strong>
+                        <span>461 players</span>
+                    </div>
+                    <div class="room-search"></div>
+                    <div class="room-list">
+                        <span class="active"></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <aside>
+                        <button>Join Room</button>
+                        <button>Favorite</button>
+                        <button>Settings</button>
+                    </aside>
                 </div>
             </div>
         </section>
 
-        <section class="stats-strip" aria-label="Vexa öne çıkanlar">
-            <div><strong>Otomatik</strong><span>son sürüm indirme</span></div>
-            <div><strong>Akıcı</strong><span>FPS ve performans araçları</span></div>
-            <div><strong>Kişisel</strong><span>tema, arka plan ve profil ayarları</span></div>
+        <section class="metrics" aria-label="Vexa öne çıkanlar">
+            <article><strong>240+</strong><span>FPS hedefi</span></article>
+            <article><strong>1 tık</strong><span>kurulum ve güncelleme</span></article>
+            <article><strong>RPC</strong><span>Discord durum entegrasyonu</span></article>
+            <article><strong>Profil</strong><span>kişisel ayar yönetimi</span></article>
         </section>
 
-        <section class="section" id="ozellikler">
+        <section class="section screenshots" id="screenshots">
             <div class="section-heading">
-                <p class="eyebrow">HaxBall Client özellikleri</p>
-                <h2>Oyuncunun gerçekten kullandığı şeyler.</h2>
+                <p class="eyebrow">Ekran görüntüleri</p>
+                <h2>Client’ın en önemli bölümleri tek bakışta.</h2>
+                <p>Gerçek uygulama akışını temsil eden temiz önizlemeler: launcher, oda tarayıcı ve ayarlar paneli.</p>
             </div>
+
+            <div class="screenshot-grid">
+                <figure class="shot-card shot-wide" data-anime>
+                    <div class="shot-frame launcher-shot">
+                        <div class="shot-header"><span></span><span></span><span></span></div>
+                        <div class="shot-content">
+                            <div class="shot-title">Vexa Launcher</div>
+                            <div class="shot-meter"><i></i></div>
+                            <div class="shot-pills"><span>Güncel</span><span>Kurulu</span><span>Hazır</span></div>
+                        </div>
+                    </div>
+                    <figcaption><strong>Launcher</strong><span>Güncelleme kontrolü, indirme ilerlemesi ve tek tıkla başlatma.</span></figcaption>
+                </figure>
+
+                <figure class="shot-card" data-anime>
+                    <div class="shot-frame browser-shot">
+                        <div class="browser-row selected"></div>
+                        <div class="browser-row"></div>
+                        <div class="browser-row"></div>
+                        <div class="browser-row"></div>
+                        <div class="browser-side"><span></span><span></span><span></span></div>
+                    </div>
+                    <figcaption><strong>Room Browser</strong><span>Filtreler, favoriler, autojoin ve okunabilir oda listesi.</span></figcaption>
+                </figure>
+
+                <figure class="shot-card" data-anime>
+                    <div class="shot-frame settings-shot">
+                        <div class="settings-tabs"><span></span><span></span><span></span></div>
+                        <div class="settings-line"></div>
+                        <div class="settings-line short"></div>
+                        <div class="settings-toggle on"></div>
+                        <div class="settings-toggle"></div>
+                    </div>
+                    <figcaption><strong>Ayarlar</strong><span>FPS, RPC, arka plan, avatar ve profil kontrolleri.</span></figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section feature-section" id="features">
+            <div class="section-heading">
+                <p class="eyebrow">Özellikler</p>
+                <h2>Oyuna girerken değil, oynarken fark ettiren detaylar.</h2>
+            </div>
+
             <div class="feature-grid">
-                <article data-anime>
-                    <span>01</span>
-                    <h3>FPS Unlocker</h3>
-                    <p>HaxBall FPS sınırını kaldırıp yüksek tazeleme hızlarında daha akıcı oyun hissi alabilirsin.</p>
-                </article>
-                <article data-anime>
-                    <span>02</span>
-                    <h3>Arka Plan Sistemi</h3>
-                    <p>Kendi görselini ya da hazır sistem arka planlarını kullan, maç başlayınca performans için optimize edilsin.</p>
-                </article>
-                <article data-anime>
-                    <span>03</span>
-                    <h3>Discord RPC</h3>
-                    <p>HaxBall durumunu Discord üzerinde gösterebilir, arkadaşlarına oyun aktiviteni kolayca paylaşabilirsin.</p>
-                </article>
-                <article data-anime>
-                    <span>04</span>
-                    <h3>Kısayollar</h3>
-                    <p>Avatar, extrapolation ve sık kullanılan komutları hızlıca yönetmek için pratik kısa yollar.</p>
-                </article>
+                <article data-anime><span>01</span><h3>FPS ve performans</h3><p>FPS unlocker, sayaç, NetGraph ve düşük gecikme odaklı Chromium ayarları.</p></article>
+                <article data-anime><span>02</span><h3>Otomatik güncelleme</h3><p>Launcher GitHub Releases üzerinden client paketini indirir, kurar ve güncel tutar.</p></article>
+                <article data-anime><span>03</span><h3>Discord RPC</h3><p>Launcher ve oyun içi durum bilgisini Discord üzerinde göstermek için Rich Presence desteği.</p></article>
+                <article data-anime><span>04</span><h3>Profil sistemi</h3><p>Nick, avatar, auth key, ülke ve kişisel oyun ayarlarını profillerde sakla.</p></article>
+                <article data-anime><span>05</span><h3>Özel arka planlar</h3><p>Görsel veya video arka planlar, geçmiş listesi ve maç sırasında performans koruması.</p></article>
+                <article data-anime><span>06</span><h3>HaxAllTool entegrasyonu</h3><p>Oda arama, favoriler, autojoin ve ek araçlarla daha pratik lobby kullanımı.</p></article>
             </div>
         </section>
 
-        <section class="section install-section" id="kurulum">
+        <section class="section download-panel">
+            <div>
+                <p class="eyebrow">Kurulum</p>
+                <h2>Windows için indir, launcher gerisini halletsin.</h2>
+                <p>En güncel installer GitHub Releases üzerinden gelir. İlk açılışta client paketi kurulmamışsa launcher otomatik olarak `app.zip` indirip hazırlar.</p>
+            </div>
+            <div class="install-steps">
+                <article><strong>1</strong><span>Setup dosyasını indir</span></article>
+                <article><strong>2</strong><span>Launcher’ı kur ve aç</span></article>
+                <article><strong>3</strong><span>Oyna butonuyla client’ı başlat</span></article>
+            </div>
+        </section>
+
+        <section class="section faq" id="faq">
             <div class="section-heading">
-                <p class="eyebrow">HaxBall client kurulumu</p>
-                <h2>İndir, kur, launcher üzerinden oyunu başlat.</h2>
+                <p class="eyebrow">SSS</p>
+                <h2>Kısa cevaplar.</h2>
             </div>
-            <ol class="steps">
-                <li><strong>Setup dosyasını indir.</strong><span>Buton her zaman GitHub’daki en son Vexa Client release dosyasını bulur.</span></li>
-                <li><strong>Kurulumu çalıştır.</strong><span>Windows uyarı verirse yayıncı imzası nedeniyle olabilir.</span></li>
-                <li><strong>Launcher’dan devam et.</strong><span>Launcher güncellemeleri kontrol eder; yeni sürüm varsa otomatik indirir ve kurar.</span></li>
-            </ol>
-        </section>
-
-        <section class="safety-note">
-            <h2>Windows uyarısı görürsen</h2>
-            <p>
-                Vexa bağımsız bir HaxBall client projesi olduğu için bazı Windows kurulumlarında bilinmeyen yayıncı uyarısı çıkabilir. Dosyalar GitHub release üzerinden yayınlanır; güncel sürümü her zaman bu sayfadaki otomatik indirme butonundan al.
-            </p>
+            <div class="faq-list">
+                <details open><summary>Vexa ücretsiz mi?</summary><p>Evet. Release dosyaları GitHub üzerinden ücretsiz yayınlanır.</p></details>
+                <details><summary>Discord RPC için token gerekir mi?</summary><p>Hayır. Sadece Discord application client ID kullanılır; bot token veya gizli şifre gerekmez.</p></details>
+                <details><summary>Windows bilinmeyen yayıncı uyarısı normal mi?</summary><p>Evet, imzalı sertifika kullanılmadığında Windows bu uyarıyı gösterebilir. Dosyayı resmi release sayfasından indirmen önerilir.</p></details>
+                <details><summary>Güncellemeler nasıl gelir?</summary><p>Launcher `versions.json` ve GitHub Releases üzerinden yeni launcher/client sürümlerini kontrol eder.</p></details>
+            </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <span>© 2026 Vexa Client</span>
-        <div>
-            <a href="/discord">Discord</a>
+        <div><strong>Vexa Client</strong><span>HaxBall için modern masaüstü deneyimi.</span></div>
+        <nav aria-label="Alt bağlantılar">
+            <a href="https://vexa-client.github.io/">Website</a>
+            <a href="https://github.com/vexa-client/vexa/releases/latest" target="_blank" rel="noreferrer">Download</a>
             <a href="https://github.com/vexa-client/vexa" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="https://github.com/vexa-client/vexa/releases/latest" target="_blank" rel="noreferrer">Son Release</a>
-        </div>
+            <a href="/discord">Discord</a>
+        </nav>
     </footer>
 
     <script src="js/app.js"></script>

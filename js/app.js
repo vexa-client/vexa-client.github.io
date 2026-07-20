@@ -1,4 +1,4 @@
-const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
+﻿const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
 const LATEST_RELEASE_PAGE = "https://github.com/vexa-client/vexa/releases/latest";
 
 function formatDate(value) {
@@ -29,9 +29,7 @@ async function hydrateLatestRelease() {
             cache: "no-store"
         });
 
-        if (!response.ok) {
-            throw new Error(`GitHub ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`GitHub ${response.status}`);
 
         const release = await response.json();
         const assets = Array.isArray(release.assets) ? release.assets : [];
@@ -42,7 +40,7 @@ async function hydrateLatestRelease() {
 
         if (installer?.browser_download_url) {
             downloadButton.href = installer.browser_download_url;
-            downloadButton.textContent = "HaxBall Client indir";
+            downloadButton.textContent = "Son sürümü indir";
             downloadButton.classList.remove("is-loading");
             status.textContent = `${installer.name} otomatik seçildi.`;
         } else {
@@ -62,7 +60,12 @@ async function hydrateLatestRelease() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function setupRevealAnimations() {
+    if (!("IntersectionObserver" in window)) {
+        document.querySelectorAll("[data-anime]").forEach((element) => element.classList.add("is-visible"));
+        return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -76,5 +79,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.querySelectorAll("[data-anime]").forEach((element) => observer.observe(element));
+}
+
+function setupMobileNav() {
+    const header = document.querySelector(".site-header");
+    const toggle = document.querySelector(".nav-toggle");
+    const links = document.querySelectorAll(".header-links a");
+
+    if (!header || !toggle) return;
+
+    toggle.addEventListener("click", () => {
+        const isOpen = header.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    links.forEach((link) => {
+        link.addEventListener("click", () => {
+            header.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupRevealAnimations();
+    setupMobileNav();
     hydrateLatestRelease();
 });
