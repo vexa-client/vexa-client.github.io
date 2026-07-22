@@ -143,6 +143,66 @@ function setupFaqAccordion() {
         });
     });
 }
+
+function setupScreenshotLightbox() {
+    const links = Array.from(document.querySelectorAll(".shot-frame[href]"));
+    if (!links.length) return;
+
+    const modal = document.createElement("div");
+    modal.className = "image-lightbox";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+        <button class="lightbox-close" type="button" aria-label="Görseli kapat">×</button>
+        <figure class="lightbox-panel">
+            <img class="lightbox-image" alt="">
+            <figcaption class="lightbox-caption"></figcaption>
+        </figure>
+    `;
+    document.body.appendChild(modal);
+
+    const image = modal.querySelector(".lightbox-image");
+    const caption = modal.querySelector(".lightbox-caption");
+    const closeButton = modal.querySelector(".lightbox-close");
+
+    const close = () => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        window.setTimeout(() => {
+            if (!modal.classList.contains("is-open")) image.removeAttribute("src");
+        }, 180);
+    };
+
+    const open = (link) => {
+        const source = link.getAttribute("href");
+        const thumb = link.querySelector("img");
+        const title = link.closest("figure")?.querySelector("figcaption strong")?.textContent || thumb?.alt || "Ekran görüntüsü";
+        const description = link.closest("figure")?.querySelector("figcaption span")?.textContent || "";
+
+        image.src = source;
+        image.alt = thumb?.alt || title;
+        caption.innerHTML = `<strong>${title}</strong>${description ? `<span>${description}</span>` : ""}`;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+        closeButton.focus({ preventScroll: true });
+    };
+
+    links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            open(link);
+        });
+    });
+
+    closeButton.addEventListener("click", close);
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) close();
+    });
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) close();
+    });
+}
 function setupMobileNav() {
     const header = document.querySelector(".site-header");
     const toggle = document.querySelector(".nav-toggle");
@@ -167,5 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupRevealAnimations();
     setupMobileNav();
     setupFaqAccordion();
+    setupScreenshotLightbox();
     hydrateLatestRelease();
 });

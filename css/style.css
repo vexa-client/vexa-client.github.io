@@ -666,6 +666,88 @@ h2 {
     padding: 0 20px 20px;
 }
 
+body.lightbox-open { overflow: hidden; }
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 32px;
+    background: rgba(2, 7, 6, 0.82);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.image-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-panel {
+    width: min(1180px, 100%);
+    max-height: calc(100vh - 64px);
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    transform: translateY(14px) scale(0.98);
+    transition: transform 220ms ease;
+}
+
+.image-lightbox.is-open .lightbox-panel {
+    transform: translateY(0) scale(1);
+}
+
+.lightbox-image {
+    display: block;
+    width: 100%;
+    max-height: calc(100vh - 160px);
+    object-fit: contain;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: #050908;
+    box-shadow: var(--shadow);
+}
+
+.lightbox-caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.lightbox-caption strong {
+    color: var(--text);
+    font-size: 16px;
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(16, 27, 25, 0.9);
+    color: var(--text);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.lightbox-close:hover {
+    transform: translateY(-2px);
+    background: rgba(53, 227, 157, 0.16);
+    border-color: rgba(53, 227, 157, 0.34);
+}
 .site-footer {
     display: flex;
     justify-content: space-between;
@@ -768,6 +850,10 @@ h2 {
 }
 
 @media (max-width: 620px) {
+    .image-lightbox { padding: 18px; }
+    .lightbox-close { top: 12px; right: 12px; }
+    .lightbox-image { max-height: calc(100vh - 150px); }
+
     main,
     .site-footer { width: min(100% - 24px, 1180px); }
 
