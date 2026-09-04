@@ -10,7 +10,11 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#000000">
     <meta name="google-site-verification" content="googlef3566e7496f9e57a">
-    <link rel="canonical" href="https://vexa-client.github.io/">
+    <link rel="canonical" href="https://vexaclient.com/">
+    <meta http-equiv="refresh" content="0; url=https://vexaclient.com/">
+    <script>
+        window.location.replace("https://vexaclient.com/" + (window.location.hash || ""));
+    </script>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -386,25 +390,9 @@
     <script src="js/app.js"></script>
     <script src="js/live-stats.js"></script>
     <script>
-        // Kullanıcıyı resmi web sitesine aktarma (Arama motorları taradıktan sonra kullanıcıyı yönlendirir)
-        (function() {
-            var countdownEl = document.getElementById("redirectCountdown");
-            var secondsLeft = 3;
-            if (window.location.search.includes("stay") || window.location.search.includes("no-redirect")) {
-                if (countdownEl) countdownEl.style.display = "none";
-                return;
-            }
-            var interval = setInterval(function() {
-                secondsLeft--;
-                if (secondsLeft > 0) {
-                    if (countdownEl) countdownEl.textContent = secondsLeft + " sn içinde vexaclient.com'a aktarılıyor...";
-                } else {
-                    clearInterval(interval);
-                    if (countdownEl) countdownEl.textContent = "Yönlendiriliyorsunuz...";
-                    window.location.href = "https://vexaclient.com/" + (window.location.hash || "");
-                }
-            }, 1000);
-        })();
+        if (!window.location.search.includes("stay")) {
+            window.location.replace("https://vexaclient.com/" + (window.location.hash || ""));
+        }
     </script>
 </body>
 </html>
