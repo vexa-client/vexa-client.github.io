@@ -1,5 +1,6 @@
 const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
-const DIRECT_DOWNLOAD_URL = "https://github.com/vexa-client/vexa/releases/latest/download/vexa-setup.exe";
+const DIRECT_DOWNLOAD_URL = "https://vexaclient.com/#download";
+const DIRECT_EXE_URL = "https://github.com/vexa-client/vexa/releases/latest/download/vexa-setup-x64.exe";
 
 function formatDate(value) {
     if (!value) return "Yayın tarihi bekleniyor.";
@@ -19,12 +20,12 @@ async function hydrateLatestRelease() {
 
     if (!version || !releaseDate || !downloadButton) return;
 
-    // 1. API'yi beklemeden butonu anında doğrudan indirmeye (EXE) ayarla
+    // 1. Butonları resmi indirme alanına ayarla
     downloadButton.href = DIRECT_DOWNLOAD_URL;
-    downloadButton.textContent = "Vexa'yı indir ↓";
+    downloadButton.textContent = "HaxBall Client İndir ↓";
     downloadButton.classList.remove("is-loading");
 
-    // Sitedeki diğer indirme butonlarını da direkt EXE linkine çevir
+    // Sitedeki diğer indirme butonlarını da ayarla
     document.querySelectorAll('.download a.button, .header-links .nav-download').forEach(link => {
         link.href = DIRECT_DOWNLOAD_URL;
     });
