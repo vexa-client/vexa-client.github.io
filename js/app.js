@@ -1,5 +1,5 @@
 const REPO_RELEASE_API = "https://api.github.com/repos/vexa-client/vexa/releases/latest";
-const LATEST_RELEASE_PAGE = "https://github.com/vexa-client/vexa/releases/latest";
+const DIRECT_DOWNLOAD_URL = "https://github.com/vexa-client/vexa/releases/latest/download/vexa-setup.exe";
 
 function formatDate(value) {
     if (!value) return "Yayın tarihi bekleniyor.";
@@ -11,20 +11,26 @@ function formatDate(value) {
     }).format(new Date(value));
 }
 
-function pickAsset(assets, matcher) {
-    return assets.find((asset) => matcher.test(asset.name));
-}
-
 async function hydrateLatestRelease() {
     const version = document.getElementById("releaseVersion");
     const releaseDate = document.getElementById("releaseDate");
     const downloadButton = document.getElementById("downloadButton");
-    const status = document.getElementById("downloadStatus");
     const launcherReleaseStatus = document.getElementById("launcherReleaseStatus");
 
-    if (!version || !releaseDate || !downloadButton || !status) return;
+    if (!version || !releaseDate || !downloadButton) return;
+
+    // 1. API'yi beklemeden butonu anında doğrudan indirmeye (EXE) ayarla
+    downloadButton.href = DIRECT_DOWNLOAD_URL;
+    downloadButton.textContent = "Vexa'yı indir ↓";
+    downloadButton.classList.remove("is-loading");
+
+    // Sitedeki diğer indirme butonlarını da direkt EXE linkine çevir
+    document.querySelectorAll('.download a.button, .header-links .nav-download').forEach(link => {
+        link.href = DIRECT_DOWNLOAD_URL;
+    });
 
     try {
+        // 2. Sadece ekrandaki metinleri (V1.4.4 gibi) güncellemek için API'ye istek at
         const response = await fetch(REPO_RELEASE_API, {
             headers: { Accept: "application/vnd.github+json" },
             cache: "no-store"
@@ -33,33 +39,17 @@ async function hydrateLatestRelease() {
         if (!response.ok) throw new Error(`GitHub ${response.status}`);
 
         const release = await response.json();
-        const assets = Array.isArray(release.assets) ? release.assets : [];
-        const installer = pickAsset(assets, /^vexa-launcher-setup-.*\.exe$/i);
 
         version.textContent = release.tag_name || "Son sürüm";
         if (launcherReleaseStatus) launcherReleaseStatus.textContent = `${release.tag_name || "Son sürüm"} hazır`;
         releaseDate.textContent = `${formatDate(release.published_at)} tarihinde yayınlandı.`;
 
-        if (installer?.browser_download_url) {
-            downloadButton.href = installer.browser_download_url;
-            downloadButton.textContent = "Son sürümü indir";
-            downloadButton.classList.remove("is-loading");
-            status.textContent = `${installer.name} otomatik seçildi.`;
-        } else {
-            downloadButton.href = release.html_url || LATEST_RELEASE_PAGE;
-            downloadButton.textContent = "Release sayfasını aç";
-            downloadButton.classList.remove("is-loading");
-            status.textContent = "Setup dosyası bulunamadı, release sayfasına yönlendirilecek.";
-        }
     } catch (error) {
-        version.textContent = "Son release";
-        if (launcherReleaseStatus) launcherReleaseStatus.textContent = "Release bilgisi bekleniyor";
-        releaseDate.textContent = "GitHub bilgisi şu an alınamadı.";
-        downloadButton.href = LATEST_RELEASE_PAGE;
-        downloadButton.textContent = "Release sayfasını aç";
-        downloadButton.classList.remove("is-loading");
-        status.textContent = "Bağlantı sorunu olursa GitHub release sayfasından indirebilirsin.";
-        console.warn("Release bilgisi alınamadı:", error);
+        // API limiti dolsa bile butonlar zaten EXE indirmeye ayarlandı, sadece metinleri yedekle
+        version.textContent = "Son sürüm";
+        if (launcherReleaseStatus) launcherReleaseStatus.textContent = "Son sürüm hazır";
+        releaseDate.textContent = "Hemen indirip oynamaya başla.";
+        console.warn("Sürüm bilgisi çekilemedi (API limiti dolmuş olabilir), ancak indirme linki sorunsuz çalışacak:", error);
     }
 }
 
@@ -83,7 +73,6 @@ function setupRevealAnimations() {
 
     document.querySelectorAll("[data-anime]").forEach((element) => observer.observe(element));
 }
-
 
 function setupFaqAccordion() {
     const items = Array.from(document.querySelectorAll(".faq-list details"));
@@ -203,6 +192,7 @@ function setupScreenshotLightbox() {
         if (event.key === "Escape" && modal.classList.contains("is-open")) close();
     });
 }
+
 function setupMobileNav() {
     const header = document.querySelector(".site-header");
     const toggle = document.querySelector(".nav-toggle");

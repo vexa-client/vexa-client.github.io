@@ -1,4 +1,4 @@
-﻿const VERCEL_API_URL = "https://vexa-vercel-api.vercel.app";
+const VERCEL_API_URL = "https://vexa-vercel-api.vercel.app";
 
 async function fetchLiveUsers() {
     const badge = document.getElementById("liveUsersBadge");
